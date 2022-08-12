@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace(命名空间)=绑定一个对应的Mapper接口-->
+<mapper namespace="com.jiang.mapper.UserMapper">
+
+<!--起别名-->
+    <select id="getUserById" resultMap="UserMap">
+        select id , name , pwd from user where id = #{id}
+    </select>
+
+    <resultMap id="UserMap" type="user">
+        <!-- id为主键 -->
+<!--        <id column="id" property="id"/>-->
+<!--        &lt;!&ndash; column是数据库表的列名 , property是对应实体类的属性名 &ndash;&gt;-->
+<!--        <result column="name" property="name"/>-->
+        <result column="pwd" property="password"/>
+    </resultMap>
+
+    <!--分页-->
+    <select id="getUserByLimit" parameterType="map" resultType="user">
+        select * from user limit #{startIndex},#{pageSize}
+    </select>
+</mapper>

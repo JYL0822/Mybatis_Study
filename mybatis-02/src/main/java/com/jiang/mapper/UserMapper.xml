@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace(命名空间)=绑定一个对应的Mapper接口-->
+<mapper namespace="com.jiang.mapper.UserMapper">
+    <select id="getUserList" resultType="user">
+        select * from user
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="com.jiang.pojo.User">
+        select * from user where id= #{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.jiang.pojo.User">
+        insert into user (id,name,pwd) values (#{id},#{name},#{pwd})
+    </insert>
+
+<!--正规修改信息-->
+    <update id="updateUser" parameterType="com.jiang.pojo.User">
+        update user
+        set name=#{name},pwd=#{pwd}
+        where id=#{id};
+    </update>
+
+<!--parameterType="int"返回类型是int可以不写-->
+    <delete id="deleteUser">
+        delete
+        from user
+        where id=#{id};
+    </delete>
+</mapper>
